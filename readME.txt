@@ -1,0 +1,6 @@
+- I/O
+- USing regex labrary
+- Learn how to work with docx library
+- an application that can save time by auto generate a cover letter from a blueprint model
+- input: a word file containing model of a cover letter and a list of body paragraphs
+- output: a cover letter in a word file that will make your application stand out!
