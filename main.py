@@ -1,6 +1,6 @@
 import re
 import datetime
-import docx #ref: https://python-docx.readthedocs.io/en/latest/
+import docx #more details: https://python-docx.readthedocs.io/en/latest/
 
 def main():
     ''' map store all input keys'''
@@ -51,6 +51,7 @@ def main():
                 key = ""
                 continue
 
+    ''' sub body paragraph to the model '''
     body['intro'] = body['intro'].strip()
     body['intro'] = re.sub(r"== COMP NAME ==", dic['compName'], body['intro'])
     body['intro'] = re.sub(r"== POSITION ==", dic['position'], body['intro'])
@@ -67,7 +68,7 @@ def main():
     ''' make a cover letter and export it in aa form of docx '''
     constructDoxc(f_model, dic)
 
-''' sub in all info '''
+''' sub in all info to the model '''
 def subIn(dic, model, body, date):
     f_model = re.sub(r"== NAME ==", dic['user'], model)
     f_model = re.sub(r"== ADDRESS 1 ==", dic['userAddress1'], f_model)
@@ -81,7 +82,6 @@ def subIn(dic, model, body, date):
     f_model = re.sub(r"== INTRO ==", body['intro'], f_model)
     f_model = re.sub(r"== BODY 1 ==", body['b1'], f_model)
     f_model = re.sub(r"== BODY 2 ==", body['b2'], f_model)
-
     return f_model
 
 ''' get current date '''
@@ -90,7 +90,7 @@ def getDate():
     str = date.strftime("%B") + " " + date.strftime("%d") + ", " + date.strftime("%Y")
     return str
 
-''' extract code from the file '''
+''' extract key code '''
 def getParagraph(line, dic):
     pattern = re.compile(r"^{{ (.+) }}?")
     matchObj = pattern.search(line)
@@ -111,16 +111,25 @@ def getInfo(dic):
     ''' ask a few questions to construct a cover letter '''
     dic['body1'] = input("Enter code of your first body paragraph: ").strip()
     dic['body2'] = input("Enter code of your second body paragraph: ").strip()
-    dic['user'] = input("Enter your name: ").strip()
-    dic['userAddress1'] = input("Enter your address line 1: ").strip()
-    dic['userAddress2'] = input("Enter your address line 2: ").strip()
+    dic['user'] = input("Enter your name: ").strip().title()
+    dic['userAddress1'] = input("Enter your address line 1: ").strip().title()
+    dic['userAddress2'] = input("Enter your address line 2: ").strip().title()
     dic['contactNumber'] = input("Enter your contact number: ").strip()
     dic['email'] = input("Enter your contact email: ").strip()
-    dic['compName'] = input("Enter the company's name that you are applying for: ").strip()
-    dic['compAddress1'] = input("Enter the company's address line 1: ").strip()
-    dic['compAddress2'] = input("Enter the company's address line 2: ").strip()
-    dic['position'] = input("Enter the position you are applying for: ").strip()
+    dic['compName'] = input("Enter the company's name that you are applying for: ").strip().title()
+    dic['compAddress1'] = input("Enter the company's address line 1: ").strip().title()
+    dic['compAddress2'] = input("Enter the company's address line 2: ").strip().title()
+    dic['position'] = input("Enter the position you are applying for: ").strip().title()
     dic['positionNO'] = input("Enter the job/position number if it is applicable: ").strip()
+
+    ''' format the text in the module '''
+    formatInput(dic)
+
+''' format the text in the module '''
+def formatInput(dic):
+    ''' replace multiple whitespaces to a single whitespace '''
+    for str in dic:
+        dic[str] = ' '.join(dic[str].split())
 
     ''' format code for paragraph '''
     dic['body1'] = re.sub(r"[\D]+", '', dic['body1'])
@@ -130,7 +139,49 @@ def getInfo(dic):
     num = re.sub(r"[\D]+", '', dic['contactNumber'])
     dic['contactNumber'] = "(" + num[:3] + ")-" + num[3:6] + "-" + num[6:]
 
-    #format mailing address using regex
+    ''' format mailing address using regex '''
+    pattern = re.compile(r"(.+)(( \w\d\w)( )?(\d\w\d))")
+
+    matchObj = pattern.search(dic['userAddress2'])
+    formatpostalCode(dic, matchObj, 'userAddress2')
+
+    matchObj = pattern.search(dic['compAddress2'])
+    formatpostalCode(dic, matchObj, 'compAddress2')
+
+    ''' capitalize first letter of every word in address  '''
+    formatAddress(dic, dic['userAddress1'], 'userAddress1')
+    formatAddress(dic, dic['userAddress2'], 'userAddress2')
+    formatAddress(dic, dic['compAddress1'], 'compAddress1')
+    formatAddress(dic, dic['compAddress2'], 'compAddress2')
+
+''' capitalize first letter of every word in address '''
+def formatAddress(dic, address, key):
+    li = address.split()
+    li2 = []
+
+    ''' search for province '''
+    pattern = re.compile(r"(.+)( \w\w)(, )?( )?(\w\d\w)( )?(\d\w\d)")
+    m = pattern.search(dic[key])
+
+    for x in li:
+        ''' capital province '''
+        if m:
+            if m.group(2).strip() == x.strip() or m.group(2).strip() + ',' == x.strip():
+                li2.append(x.upper())
+                continue
+        ''' capital letter of every word '''
+        li2.append(x)
+
+    s = ' '.join(li2)
+    dic[key] = s
+
+''' format postal code '''
+def formatpostalCode(dic, matchObj, str):
+    if matchObj:
+        postalCode = matchObj.group(2)
+        postalCode = postalCode.replace(" ", "")
+        postalCode = postalCode[:3] + ' ' + postalCode[3:]
+        dic[str] = matchObj.group(1) + ' ' + (postalCode).upper()
 
 ''' construct a docx file and export it '''
 def constructDoxc(text, dic):
@@ -165,7 +216,6 @@ def constructDoxc(text, dic):
             head.font.size = docx.shared.Pt(18)
             continue
 
-        #make these 3 for...loop better use regex to extract the condition
         ''' format contact number '''
         if counter == 3:
             formatAilgn(mydoc, li, dic['contactNumber'])
@@ -188,14 +238,16 @@ def constructDoxc(text, dic):
 ''' Big thanks for the reference: https://stackoverflow.com/questions/58656450/how-to-use-tabletop-by-python-docx '''
 ''' format left and right alian in the same line '''
 def formatAilgn(mydoc, currLi, text):
+    ''' add a line containing address on the left align and contact number/email on the right align '''
     p = mydoc.add_paragraph(f'{currLi}\t{text}')  # tab will trigger tabstop
-    sec = mydoc.sections[0]
 
     ''' finding end_point for the content '''
-    margin_end = docx.shared.Inches(sec.page_width.inches - (sec.left_margin.inches + sec.right_margin.inches))
-    tab_stops = p.paragraph_format.tab_stops
+    sec = mydoc.sections[0]
+    margin_end = docx.shared.Inches(sec.page_width.inches
+                                    - (sec.left_margin.inches + sec.right_margin.inches))
 
     ''' adding new tab stop, to the end point, and making sure that it's `RIGHT` aligned. '''
+    tab_stops = p.paragraph_format.tab_stops
     tab_stops.add_tab_stop(margin_end, docx.enum.text.WD_TAB_ALIGNMENT.RIGHT)
 
 ''' call main() '''
