@@ -27,11 +27,8 @@ This 1st version is a pure python scripts that is only avaliable for me. However
 
 ## example of inputFile, inputs, model and result
 <p float="left">
-	<img src="images/docxInput.jpg" width=300> 
-	<img src="images/input.jpg" width=300>
-</p>
-
-<p float="left">
-	<img src="images/model.jpg" width=300>
-	<img src="images/result.jpg" width=300> 
+	<img src="images/docxInput.jpg" width=500> 
+	<img src="images/input.jpg" width=500>
+	<img src="images/model.jpg" width=500>
+	<img src="images/result.jpg" width=500> 
 </p>
