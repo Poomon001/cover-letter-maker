@@ -1,4 +1,4 @@
-#Cover-Letter-maker
+# Cover-Letter-maker
 Cover Letter Maker is an application that generate a cover letter according to the user's input. It means to reduce the amount of time that people spend on constructing a cover letter.
 
 Each year I spend a lot of time writing a cover letter for coop intern. This fact inspires me to come up a piece of software that can reduce this workload.
@@ -12,16 +12,15 @@ Each year I spend a lot of time writing a cover letter for coop intern. This fac
 5. Format, Beautify and substitute the info into a prepared model
 6. Assemble all sections and return a well-done cover letter to users
 
-##Key skills      
-- Python
-- I/O
-- Regex library
-- python-docx library
-- Datetime
+## Key skills      
+* Python
+* I/O
+* Regex library
+* python-docx library
+* Datetime
 
-##Upcoming features
+## Upcoming features
 This 1st version is a pure python scripts that is only avaliable for me. However, I am currently working for the 2nd version:
 1. Turn this app into a web app by using Flask flameework
 2. Adding HTML and CSS for UI
-3. Adding instructions
-4. Deploy it on Heroku  
+3. Deploy it on Heroku  
