@@ -25,16 +25,16 @@ This 1st version is a pure python scripts that is only avaliable for me. However
 2. Adding HTML and CSS for UI
 3. Deploy it on Heroku 
 
-## example of inputFile, input, model and result
+## Example of inputFile, input, model and result
 
-### inputFile
+### InputFile
 <img src="images/docxInput.jpg" width=500>
  
-### input
+### Input
 <img src="images/input.jpg" width=500>
 
-### model
+### Model
 <img src="images/model.jpg" width=500>
 
-### result
+### Result
 <img src="images/result.jpg" width=500> 
