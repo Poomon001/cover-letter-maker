@@ -26,7 +26,12 @@ This 1st version is a pure python scripts that is only avaliable for me. However
 3. Deploy it on Heroku 
 
 ## example of inputFile, inputs, model and result
-<img src="images/docxInput.jpg" width=100> 
-<img src="images/input.jpg" width=100>
-<img src="images/model.jpg" width=100>
-<img src="images/result.jpg" width=100> 
+<p float="left">
+	<img src="images/docxInput.jpg" width=300> 
+	<img src="images/input.jpg" width=300>
+</p>
+
+<p float="left">
+	<img src="images/model.jpg" width=300>
+	<img src="images/result.jpg" width=300> 
+</p>
