@@ -21,7 +21,7 @@ Each year I spend a lot of time writing a cover letter for coop intern. This fac
 
 ## Upcoming features
 This 1st version is a pure python scripts that is only avaliable for me. However, I am currently working for the 2nd version:
-1. Turn this app into a web app by using Flask flameework
+1. Turn this app into a web app by using Flask flamework
 2. Adding HTML and CSS for UI
 3. Deploy it on Heroku 
 
