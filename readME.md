@@ -4,13 +4,16 @@ Cover Letter Maker is an application that generate a cover letter according to t
 Each year I spend a lot of time writing a cover letter for coop intern. This fact inspires me to come up a piece of software that can reduce this workload.
 
 
-##How does Cover Letter Maker works?
+## How does Cover Letter Maker works?
 1. Ask users to upload a docx file containing a list body paragraphs
 2. Ask user to a few info needed for their coveer letter
 3. Extract the info entered by users 
 4. Generate some necessary info
 5. Format, Beautify and substitute the info into a prepared model
 6. Assemble all sections and return a well-done cover letter to users
+
+![](images/docxInput.jpg) ![](images/input.jpg)
+![](images/model.jpg) ![](images/result.jpg)
 
 ## Key skills      
 * Python
