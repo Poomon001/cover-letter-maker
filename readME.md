@@ -26,7 +26,7 @@ This 1st version is a pure python scripts that is only avaliable for me. However
 3. Deploy it on Heroku 
 
 ## example of inputFile, input, model and result
-<p float="left">
+
 ### inputFile
 	<img src="images/docxInput.jpg" width=500> 
 ### input
@@ -35,4 +35,3 @@ This 1st version is a pure python scripts that is only avaliable for me. However
 	<img src="images/model.jpg" width=500>
 ### result
 	<img src="images/result.jpg" width=500> 
-</p>
