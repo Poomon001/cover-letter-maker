@@ -28,10 +28,10 @@ This 1st version is a pure python scripts that is only avaliable for me. However
 ## example of inputFile, input, model and result
 
 ### inputFile
-	<img src="images/docxInput.jpg" width=500> 
+<img src="images/docxInput.jpg" width=500> 
 ### input
-	<img src="images/input.jpg" width=500>
+<img src="images/input.jpg" width=500>
 ### model
-	<img src="images/model.jpg" width=500>
+<img src="images/model.jpg" width=500>
 ### result
-	<img src="images/result.jpg" width=500> 
+<img src="images/result.jpg" width=500> 
