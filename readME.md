@@ -12,9 +12,6 @@ Each year I spend a lot of time writing a cover letter for coop intern. This fac
 5. Format, Beautify and substitute the info into a prepared model
 6. Assemble all sections and return a well-done cover letter to users
 
-![](images/docxInput.jpg) ![](images/input.jpg)
-![](images/model.jpg) ![](images/result.jpg)
-
 ## Key skills      
 * Python
 * I/O
@@ -26,4 +23,10 @@ Each year I spend a lot of time writing a cover letter for coop intern. This fac
 This 1st version is a pure python scripts that is only avaliable for me. However, I am currently working for the 2nd version:
 1. Turn this app into a web app by using Flask flameework
 2. Adding HTML and CSS for UI
-3. Deploy it on Heroku  
+3. Deploy it on Heroku 
+
+## example of inputFile, inputs, model and result
+<img src="images/docxInput.jpg" width=100> 
+<img src="images/input.jpg" width=100>
+<img src="images/model.jpg" width=100>
+<img src="images/result.jpg" width=100> 
