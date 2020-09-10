@@ -1,4 +1,4 @@
-# Cover-Letter-maker
+# Cover-Letter-Maker
 Cover Letter Maker is an application that generate a cover letter according to the user's input. It means to reduce the amount of time that people spend on constructing a cover letter.
 
 Each year I spend a lot of time writing a cover letter for coop intern. This fact inspires me to come up a piece of software that can reduce this workload.
