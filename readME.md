@@ -9,7 +9,7 @@ Each year I spend a lot of time writing a cover letter for coop intern. This fac
 2. Ask users to a few info needed for their cover letter
 3. Extract the info entered by users 
 4. Generate some necessary info
-5. Format, Beautify and substitute the info into a prepared model
+5. Format, beautify and substitute the info into a prepared model
 6. Assemble all sections and return a well-done cover letter to users
 
 ## Key skills      
@@ -22,7 +22,7 @@ Each year I spend a lot of time writing a cover letter for coop intern. This fac
 ## Upcoming features
 This 1st version is a pure python script that is only available for me. However, I am currently working for the 2nd version:
 1. Turn this app into a web app by using Flask framework
-2. Adding HTML and CSS for UI
+2. Add HTML and CSS for UI
 3. Deploy it on Heroku 
 
 ## Example of inputFile, input, model and result
