@@ -158,8 +158,6 @@ def formatInput(dic):
 
     ''' format work duration '''
     formatWorkDuration(dic, 'duration')
-    print((dic["position"] + dic["duration"]))
-    print((dic["duration"] + dic["positionNO"]))
 
 ''' format work duration '''
 def formatWorkDuration(dic, key):
