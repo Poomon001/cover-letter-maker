@@ -5,7 +5,7 @@ import docx #more details: https://python-docx.readthedocs.io/en/latest/
 def main():
     ''' map store all input keys'''
     dic = {'body1': "", 'body2': "", 'user': "", 'userAddress1': "", 'userAddress2': "",
-           'contactNumber': "", 'email': "", 'compName': "", 'compAddress1': "",
+           'contactNumber': "", 'email': "", 'duration': "", 'compName': "", 'compAddress1': "",
            'compAddress2': "", 'position': "", 'positionNO': ""}
 
     ''' store 3 body paragraphs '''
@@ -74,6 +74,7 @@ def subIn(dic, model, body, date):
     f_model = re.sub(r"== ADDRESS 1 ==", dic['userAddress1'], f_model)
     f_model = re.sub(r"== ADDRESS 2 ==", dic['userAddress2'], f_model)
     f_model = re.sub(r"== DATE ==", date, f_model)
+    f_model = re.sub(r"== MONTH ==", dic['duration'], f_model)
     f_model = re.sub(r"== COMP NAME ==", dic['compName'], f_model)
     f_model = re.sub(r"== COMP ADDRESS 1 ==", dic['compAddress1'], f_model)
     f_model = re.sub(r"== COMP ADDRESS 2 ==", dic['compAddress2'], f_model)
@@ -116,6 +117,7 @@ def getInfo(dic):
     dic['userAddress2'] = input("Enter your address line 2: ").strip().title()
     dic['contactNumber'] = input("Enter your contact number: ").strip()
     dic['email'] = input("Enter your contact email: ").strip()
+    dic['duration'] = input("Enter your work duration in months: ").strip()
     dic['compName'] = input("Enter the company's name that you are applying for: ").strip().title()
     dic['compAddress1'] = input("Enter the company's address line 1: ").strip().title()
     dic['compAddress2'] = input("Enter the company's address line 2: ").strip().title()
@@ -153,6 +155,28 @@ def formatInput(dic):
     formatAddress(dic, dic['userAddress2'], 'userAddress2')
     formatAddress(dic, dic['compAddress1'], 'compAddress1')
     formatAddress(dic, dic['compAddress2'], 'compAddress2')
+
+    ''' format work duration '''
+    formatWorkDuration(dic, 'duration')
+    print((dic["position"] + dic["duration"]))
+    print((dic["duration"] + dic["positionNO"]))
+
+''' format work duration '''
+def formatWorkDuration(dic, key):
+    if dic[key] == "":
+        dic[key] = ""
+        return
+
+    pattern = re.compile(r"\d")
+    if dic[key] != "" and pattern.search(dic[key]):
+        ''' if there is at least one number, extract a number from string '''
+        m = re.findall(pattern, dic[key])
+        month = "".join(m)
+        formatDuration = "(for " + month + " months)"
+        dic[key] = formatDuration
+    else:
+        ''' if there is no number (only alphabet), set Duration to empty '''
+        dic[key] = ""
 
 ''' capitalize first letter of every word in address '''
 def formatAddress(dic, address, key):
@@ -230,6 +254,19 @@ def constructDoxc(text, dic):
             head = mydoc.add_paragraph().add_run(li)
             head.bold = True
             continue
+
+        if counter == 12 and dic["duration"] != "":
+                pattern = re.compile(r"(.+)(\(.+\))(.+)")
+                former = pattern.match(li).group(1)
+                duration = pattern.match(li).group(2)
+                latter = pattern.match(li).group(3)
+
+                ''' add paragraph and 2 in-line texts '''
+                paragraph = mydoc.add_paragraph(former)
+                paragraph.add_run(" " + duration).bold = True
+                paragraph.add_run(latter)
+                continue
+
         mydoc.add_paragraph(li)
 
     ''' save and export '''
