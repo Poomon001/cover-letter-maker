@@ -182,13 +182,19 @@ def formatAddress(dic, address, key):
     li2 = []
 
     ''' search for province '''
-    pattern = re.compile(r"(.+)( \w\w)(, )?( )?(\w\d\w)( )?(\d\w\d)")
+    pattern = re.compile(r"([A-Za-z]*)([,])?( \w\w)( )?(\w\d\w)( )?(\d\w\d)")
     m = pattern.search(dic[key])
 
     for x in li:
-        ''' capital province '''
+
         if m:
-            if m.group(2).strip() == x.strip() or m.group(2).strip() + ',' == x.strip():
+            ''' remove , after city '''
+            if x[-1] == ',':
+                li2.append(x[0:-1])
+                continue
+
+            ''' capital province '''
+            if m.group(3).strip() == x.strip() or m.group(3).strip() + ',' == x.strip():
                 li2.append(x.upper())
                 continue
         ''' capital letter of every word '''
